@@ -1,20 +1,55 @@
 
 import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { GoogleGenAI } from '@google/genai';
 import { Message } from '../types';
 
 export interface ChatSectionHandle {
   sendMessage: (text: string) => void;
 }
 
-const ChatSection = forwardRef<ChatSectionHandle, {}>((props, ref) => {
+const DEMO_RESPONSES: Array<{ keywords: string[]; response: string }> = [
+  {
+    keywords: ['עלות', 'cost', 'budget', 'דוח'],
+    response:
+      'דוח עלויות לדוגמה: 23% חיסכון חודשי בזכות ניתוב אוטומטי למודל המתאים, 17% פחות קריאות כפולות באמצעות Semantic Cache, וחריגות תקציב נחסמו בזמן אמת.',
+  },
+  {
+    keywords: ['מודל', 'model', 'claude', 'gpt', 'gemini', 'החלף'],
+    response:
+      'החלפת מודל מתבצעת דרך שכבת Gateway אחידה (OpenAI-compatible). המשמעות: מעבר בין ספקים בלי שינוי בקוד האפליקציה ועם Guardrails זהים.',
+  },
+  {
+    keywords: ['אבטחה', 'security', 'pii', 'compliance', 'רגולציה'],
+    response:
+      'Safium מפעילה מדיניות אבטחה ארגונית לכל בקשה: סינון מידע רגיש, הרשאות RBAC לפי צוותים, ולוגים מלאים ל-SOC2/HIPAA עם קוד בקרה לכל אירוע.',
+  },
+  {
+    keywords: ['איך', 'how', 'works', 'עובד'],
+    response:
+      'בקצרה: כל קריאת AI עוברת דרך SAF.AI Gateway, שם מופעלים ניתוב מודלים, מגבלות תקציב, בדיקות תוכן, ולוגים. כך מקבלים שליטה, אבטחה וחיסכון במקום אחד.',
+  },
+];
+
+const DEFAULT_RESPONSE =
+  'קיבלתי את הבקשה. בדמו הזה התשובות סימולטיביות, אבל בארגון אמיתי אפשר לחבר את הממשק ל-LLM אמיתי דרך ה-Gateway עם אותן מדיניות ואבטחה.';
+
+const getDemoResponse = (prompt: string): string => {
+  const normalizedPrompt = prompt.trim().toLowerCase();
+  const match = DEMO_RESPONSES.find(({ keywords }) =>
+    keywords.some((keyword) => normalizedPrompt.includes(keyword))
+  );
+
+  return match?.response ?? DEFAULT_RESPONSE;
+};
+
+const ChatSection = forwardRef<ChatSectionHandle, Record<string, never>>((props, ref) => {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: 'ברוכים הבאים ל-Safium. איך אוכל לעזור היום?' }
+    { role: 'model', text: 'ברוכים הבאים ל-Safium. איך אוכל לעזור היום?' },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const typingTimeoutRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -22,7 +57,15 @@ const ChatSection = forwardRef<ChatSectionHandle, {}>((props, ref) => {
     }
   }, [messages, isTyping]);
 
-  const handleSend = async (customText?: string) => {
+  useEffect(() => {
+    return () => {
+      if (typingTimeoutRef.current) {
+        window.clearTimeout(typingTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleSend = (customText?: string) => {
     const text = customText || input;
     if (!text.trim()) return;
 
@@ -31,24 +74,10 @@ const ChatSection = forwardRef<ChatSectionHandle, {}>((props, ref) => {
     setInput('');
     setIsTyping(true);
 
-    try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: text,
-        config: {
-          systemInstruction: 'אתה העוזר של מערכת Safium (AI.SAF). התפקיד שלך הוא להסביר על פלטפורמת ה-Gateway לניהול AI בארגונים. המערכת מספקת אבטחה, ניהול תקציב, וחיסכון בעלויות API. השב בעברית קצרה, מקצועית וטכנולוגית.',
-        }
-      });
-      
-      const aiResponse = response.text || 'מצטער, הייתה לי שגיאה קטנה. אנא נסה שוב.';
-      setMessages(prev => [...prev, { role: 'model', text: aiResponse }]);
-    } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { role: 'model', text: 'שגיאה בתקשורת עם השרת.' }]);
-    } finally {
+    typingTimeoutRef.current = window.setTimeout(() => {
+      setMessages(prev => [...prev, { role: 'model', text: getDemoResponse(text) }]);
       setIsTyping(false);
-    }
+    }, 700);
   };
 
   useImperativeHandle(ref, () => ({
@@ -114,6 +143,12 @@ const ChatSection = forwardRef<ChatSectionHandle, {}>((props, ref) => {
               className="text-xs bg-[#2A3548] hover:bg-[#3d4a61] text-slate-300 py-2 px-3 rounded-lg border border-slate-700 transition-colors"
             >
               "החלף מודל ל-Claude 3.5"
+            </button>
+            <button
+              onClick={() => handleSend('בדוק מדיניות אבטחה ו-PII')}
+              className="text-xs bg-[#2A3548] hover:bg-[#3d4a61] text-slate-300 py-2 px-3 rounded-lg border border-slate-700 transition-colors"
+            >
+              "בדוק מדיניות אבטחה"
             </button>
           </div>
 
