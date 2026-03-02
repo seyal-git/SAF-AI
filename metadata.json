@@ -1,0 +1,8 @@
+{
+  "name": "SAF.AI - Enterprise AI Management",
+  "description": "A high-performance one-pager for Safium (SAF.AI), focusing on enterprise AI governance, security, and cost management.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
