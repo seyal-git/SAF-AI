@@ -157,10 +157,14 @@ This document contains all user-facing text currently used in the website, group
 ## 8) Social proof section (`components/SocialProof.tsx` + `constants.tsx`)
 
 - **SOCIAL_PROOF_TITLE**: `הסטנדרט של הגופים המובילים בישראל`
-- **SOCIAL_CLIENT_1**: `Asuta`
-- **SOCIAL_CLIENT_2**: `Matrix`
-- **SOCIAL_CLIENT_3**: `Defense Industries`
-- **SOCIAL_CLIENT_4**: `Government`
+- **SOCIAL_CLIENT_1**: `Matrix`
+- **SOCIAL_CLIENT_2**: `התעשייה האווירית (IAI)`
+- **SOCIAL_CLIENT_3**: `מדינת ישראל`
+- **SOCIAL_CLIENT_4**: `אסותא`
+- **SOCIAL_CLIENT_1_ALT**: `Matrix logo`
+- **SOCIAL_CLIENT_2_ALT**: `IAI logo`
+- **SOCIAL_CLIENT_3_ALT**: `State of Israel emblem`
+- **SOCIAL_CLIENT_4_ALT**: `Assuta hospital logo`
 
 ---
 

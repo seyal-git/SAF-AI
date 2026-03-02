@@ -10,13 +10,21 @@ const SocialProof: React.FC = () => {
           הסטנדרט של הגופים המובילים בישראל
         </h2>
         
-        <div className="flex flex-wrap justify-center gap-12 md:gap-24 items-center">
-          {CLIENTS.map((client, idx) => (
-            <div key={idx} className="flex flex-col items-center gap-2 group transition-transform hover:scale-110">
-              <span className="text-5xl filter-none drop-shadow-lg" style={{ color: client.color }}>
-                {client.logo}
-              </span>
-              <span className="font-bold text-slate-200">{client.name}</span>
+        <div className="flex flex-wrap justify-center gap-8 md:gap-10 items-start">
+          {CLIENTS.map((client) => (
+            <div
+              key={client.name}
+              className="group flex flex-col items-center gap-3 transition-transform hover:scale-[1.03]"
+            >
+              <div className="w-[230px] h-[120px] md:w-[250px] md:h-[130px] bg-white rounded-xl border border-slate-700/40 shadow-xl p-3 flex items-center justify-center">
+                <img
+                  src={client.logoSrc}
+                  alt={client.logoAlt}
+                  className="max-w-full max-h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <span className="font-bold text-slate-200 text-sm md:text-base text-center">{client.name}</span>
             </div>
           ))}
         </div>
