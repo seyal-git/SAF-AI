@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" role="img" aria-labelledby="title desc">
+  <title id="title">IAI logo</title>
+  <desc id="desc">Israel Aerospace Industries wordmark with emblem</desc>
+
+  <rect width="900" height="260" fill="#ffffff" rx="14"/>
+
+  <g transform="translate(38 46)" fill="none" stroke="#0f5a92" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="74" cy="84" r="62" stroke-width="7"/>
+    <circle cx="74" cy="84" r="41" stroke-width="5"/>
+    <path d="M20 40 L74 12 L49 53 L86 49 L35 92 L53 60 L24 62 Z" fill="#0f5a92" stroke-width="0"/>
+    <path d="M53 84 L74 64 L95 84 L74 104 Z" fill="#0f5a92" stroke-width="0"/>
+    <circle cx="74" cy="84" r="15" fill="#ffffff" stroke-width="4"/>
+    <path d="M74 68 L78 80 L90 80 L80 87 L84 99 L74 92 L64 99 L68 87 L58 80 L70 80 Z" fill="#0f5a92" stroke-width="0"/>
+  </g>
+
+  <text x="180" y="144" font-size="130" font-weight="800" font-family="Arial, Helvetica, sans-serif" fill="#0f5a92">
+    IAI
+  </text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#0f5a92">
+    <text x="425" y="106" font-size="58">Aerospace</text>
+    <text x="425" y="174" font-size="58">Industries</text>
+  </g>
+</svg>

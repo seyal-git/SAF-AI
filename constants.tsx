@@ -1,5 +1,5 @@
 
-import { Threat, VideoItem } from './types';
+import { Threat, VideoItem, Client } from './types';
 
 export const THREATS: Threat[] = [
   { id: 1, problem: "הבור התקציבי", icon: "💸", solution: "מגבלות תקציב רב-שכבתיות (Hard Limits) והתראות בזמן אמת." },
@@ -36,9 +36,25 @@ export const VIDEOS: VideoItem[] = [
   }
 ];
 
-export const CLIENTS = [
-  { name: "Asuta", logo: "🏥", color: "#FF5733" },
-  { name: "Matrix", logo: "📊", color: "#33FF57" },
-  { name: "Defense Industries", logo: "🛡️", color: "#3357FF" },
-  { name: "Government", logo: "🏛️", color: "#F333FF" }
+export const CLIENTS: Client[] = [
+  {
+    name: "Matrix",
+    logoSrc: "/industries/matrix.svg",
+    logoAlt: "Matrix logo"
+  },
+  {
+    name: "התעשייה האווירית (IAI)",
+    logoSrc: "/industries/iai.svg",
+    logoAlt: "IAI logo"
+  },
+  {
+    name: "מדינת ישראל",
+    logoSrc: "/industries/israel.svg",
+    logoAlt: "State of Israel emblem"
+  },
+  {
+    name: "אסותא",
+    logoSrc: "/industries/assuta.svg",
+    logoAlt: "Assuta hospital logo"
+  }
 ];

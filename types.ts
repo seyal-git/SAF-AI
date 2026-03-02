@@ -17,3 +17,9 @@ export interface Message {
   role: 'user' | 'model';
   text: string;
 }
+
+export interface Client {
+  name: string;
+  logoSrc: string;
+  logoAlt: string;
+}
