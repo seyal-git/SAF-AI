@@ -31,17 +31,29 @@ const App: React.FC = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen bg-[#0B0F19] selection:bg-[#FF8C00] selection:text-white">
+    <div id="top" className="min-h-screen bg-[#0B0F19] selection:bg-[#FF8C00] selection:text-white">
       {/* Navigation Header */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 ${
         isScrolled ? 'bg-[#0B0F19]/90 backdrop-blur-md shadow-2xl py-3' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="text-3xl font-black tracking-tighter cursor-pointer flex items-center gap-2">
-            <span className="bg-[#FF8C00] px-2 py-0.5 rounded italic text-white">SAF</span>
-            <span>.AI</span>
-          </div>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label="חזרה לראש העמוד"
+            className="cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00]"
+          >
+            <img
+              src="/saf-ai-logo.svg"
+              alt="SAF.AI by Cambium"
+              className="h-11 w-auto rounded-md shadow-sm"
+            />
+          </button>
           
           <div className="hidden md:flex gap-8 text-sm font-medium">
             <a href="#" className="hover:text-[#FF8C00] transition-colors">בית</a>
