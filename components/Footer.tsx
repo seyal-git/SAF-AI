@@ -2,14 +2,26 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="py-12 bg-[#0B0F19] border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="text-2xl font-black flex items-center gap-2">
-            <span className="bg-[#FF8C00] px-2 py-1 rounded text-white italic">SAF</span>
-            <span>.AI</span>
-          </div>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label="חזרה לראש העמוד"
+            className="cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8C00]"
+          >
+            <img
+              src="/saf-ai-logo.svg"
+              alt="SAF.AI by Cambium"
+              className="h-12 w-auto rounded-md"
+            />
+          </button>
           <p className="text-slate-500 text-sm">Managed by Cambium Technologies Ltd.</p>
         </div>
 
